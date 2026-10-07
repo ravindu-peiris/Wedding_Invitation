@@ -4,6 +4,7 @@ const path = require('node:path');
 const { closeMongo } = require('./lib/mongodb');
 const { json } = require('./lib/http');
 const { handleRsvpPost, handleRsvpCount } = require('./lib/rsvp');
+const { handleSettingsGet, handleSettingsPut, handleSettingsDelete } = require('./lib/settings');
 
 const ROOT = __dirname;
 const PORT = Number(process.env.PORT || 3000);
@@ -11,6 +12,11 @@ const PORT = Number(process.env.PORT || 3000);
 async function handleAPI(req, res, url) {
   if (req.method === 'POST' && url.pathname === '/api/rsvp') return handleRsvpPost(req, res);
   if (req.method === 'GET' && url.pathname === '/api/rsvp/count') return handleRsvpCount(req, res);
+  if (url.pathname === '/api/settings') {
+    if (req.method === 'GET') return handleSettingsGet(req, res);
+    if (req.method === 'PUT') return handleSettingsPut(req, res);
+    if (req.method === 'DELETE') return handleSettingsDelete(req, res);
+  }
   return json(res, 404, { error: 'API route not found.' });
 }
 

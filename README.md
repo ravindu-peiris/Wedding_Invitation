@@ -1,6 +1,6 @@
 # Ceylon Rustic Invitation with MongoDB RSVP Counts
 
-A responsive invitation preview with editable names, wedding details, and photos. RSVP replies are saved through a small Node.js API to MongoDB. The database stores only a random browser submission ID, accept/decline status, guest count, and timestamps; it does not store the guest name.
+A responsive invitation preview with editable names, wedding details, and photos. RSVP replies are saved through a small Node.js API to MongoDB. The database stores a random browser submission ID, guest name, accept/decline status, guest count, and timestamps for the private admin dashboard.
 
 ## Configure MongoDB
 
@@ -20,7 +20,7 @@ MongoDB's Node.js driver 7.x needs Node.js 20.19 or later. The official Atlas se
 
 ## RSVP dashboard
 
-The private dashboard reports confirmed guests, total responses, acceptances, and declines. It refreshes periodically and requires the server-side `RSVP_ADMIN_TOKEN`; the token is kept in the dashboard tab's session storage. Counts are aggregated in MongoDB, and individual RSVP records are never returned to the dashboard.
+The private dashboard reports confirmed guests, total responses, acceptances, declines, and a table of guest names with counts. It refreshes periodically and requires the server-side `RSVP_ADMIN_TOKEN`; the token is kept in the dashboard tab's session storage.
 
 Each browser uses a random submission ID so an RSVP changed from the same browser updates its existing record rather than counting twice. The public API validates the attendance and guest count, limits request size and submission rate, and has no cross-origin access enabled.
 
@@ -41,9 +41,9 @@ Static pages are served from the project root. RSVP API routes live in `api/`. T
 
 ## Other interactions
 
-- “Make it yours” updates names, family names, date/time, venue, address, story, couple illustration, story image, and gallery photos. Those edits stay in that browser.
+- “Make it yours” updates names, family names, date/time, venue, address, story, couple illustration, story image, and gallery photos. Saves require the same `RSVP_ADMIN_TOKEN` save key used by the admin dashboard, and changes are stored in MongoDB for all visitors.
 - The live countdown, map, and calendar links use the edited event details.
 - RSVP submissions go to the Node API; if MongoDB is not configured, the form reports that the reply could not be saved.
 - Gallery images open in a lightbox.
 
-The MongoDB connection string and admin token are not included. Add them to a private `.env` file for local use or to the hosting provider's secret environment settings before deployment. The RSVP endpoint currently stores aggregate-relevant response fields only; it does not collect names, email addresses, or phone numbers.
+The MongoDB connection string and admin token are not included. Add them to a private `.env` file for local use or to the hosting provider's secret environment settings before deployment. The RSVP endpoint stores the guest name for the private dashboard only; it does not collect email addresses or phone numbers.
