@@ -1,6 +1,17 @@
 {
-  "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" }
+  "version": 2,
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.css", "use": "@vercel/static" },
+    { "src": "invitation.js", "use": "@vercel/static" },
+    { "src": "admin.js", "use": "@vercel/static" },
+    { "src": "assets/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/admin", "dest": "/admin.html" },
+    { "src": "/api/(.*)", "dest": "/api/$1" }
   ],
   "env": {
     "TRUST_PROXY": "true"
