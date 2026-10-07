@@ -37,7 +37,7 @@ If deploying behind a trusted reverse proxy, set `TRUST_PROXY=true` only when th
    - `TRUST_PROXY=true`
 4. Redeploy after saving the variables.
 
-Static pages are served from the project root. RSVP API routes live in `api/`. The browser script is `invitation.js` (not `app.js`) so Vercel does not try to run it as a serverless function.
+Static pages are served from the project root. RSVP API routes live in `api/`. The browser script is `invitation.js` (not `app.js`) so Vercel does not try to run it as a serverless function. Local development uses `dev-server.js` (not `server.js`) so Vercel does not treat the project as a single backend app and skip static file hosting.
 
 ## Other interactions
 
