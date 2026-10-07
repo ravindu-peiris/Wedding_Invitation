@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Private RSVP count — Nimesh &amp; Dilhani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-page pattern">
+  <main class="admin-shell">
+    <a class="admin-back" href="/">← &nbsp; Invitation</a>
+    <header><p class="overline">NIMESH &amp; DILHANI</p><h1>RSVP <em>count</em></h1><p>Private guest response summary</p></header>
+    <section class="access-card" id="access-card"><form id="admin-login"><label for="access-key">Dashboard access key</label><input type="password" id="access-key" autocomplete="current-password" required minlength="32" placeholder="Enter the key configured on the server" /><button type="submit">View RSVP count</button></form><p id="admin-message" role="status" aria-live="polite"></p></section>
+    <section class="dashboard hidden" id="dashboard"><div class="dashboard-heading"><p>Wedding responses</p><button id="refresh-count">↻ Refresh</button></div><div class="metric-grid"><article class="metric metric-primary"><span>Confirmed guests</span><strong id="confirmed-guests">0</strong></article><article class="metric"><span>Total responses</span><strong id="total-responses">0</strong></article><article class="metric"><span>Joyfully accept</span><strong id="accepted-responses">0</strong></article><article class="metric"><span>Regretfully decline</span><strong id="declined-responses">0</strong></article></div><p class="updated-at" id="updated-at"></p><button class="logout" id="logout">Forget access key</button></section>
+    <p class="privacy-note">Only response totals are shown here. Guest names are not sent to or stored in MongoDB.</p>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
