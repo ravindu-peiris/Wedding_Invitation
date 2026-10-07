@@ -26,6 +26,19 @@ Each browser uses a random submission ID so an RSVP changed from the same browse
 
 If deploying behind a trusted reverse proxy, set `TRUST_PROXY=true` only when that proxy replaces (rather than appends untrusted) `X-Forwarded-For` headers; the rate limiter uses that address for per-guest limits.
 
+## Deploy on Vercel
+
+1. Push this repo to GitHub and import it in Vercel.
+2. Leave the framework preset as **Other** and do not set a custom build command.
+3. In Vercel **Project Settings → Environment Variables**, add the same values from `.env`:
+   - `MONGODB_URI`
+   - `MONGODB_DB`
+   - `RSVP_ADMIN_TOKEN`
+   - `TRUST_PROXY=true`
+4. Redeploy after saving the variables.
+
+Static pages are served from the project root. RSVP API routes live in `api/`. The browser script is `invitation.js` (not `app.js`) so Vercel does not try to run it as a serverless function.
+
 ## Other interactions
 
 - “Make it yours” updates names, family names, date/time, venue, address, story, couple illustration, story image, and gallery photos. Those edits stay in that browser.
