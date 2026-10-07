@@ -29,7 +29,7 @@ If deploying behind a trusted reverse proxy, set `TRUST_PROXY=true` only when th
 ## Deploy on Vercel
 
 1. Push this repo to GitHub and import it in Vercel.
-2. Leave the framework preset as **Other**, do not set a custom build command, and do not set an output directory override. `vercel.json` serves static files from the project root and deploys only the files in `api/` as serverless functions.
+2. Leave the framework preset as **Other**, do not set a custom build command, and do not set an output directory override. Static files are served from the project root and files in `api/` are deployed as serverless functions automatically.
 3. In Vercel **Project Settings → Environment Variables**, add the same values from `.env`:
    - `MONGODB_URI`
    - `MONGODB_DB`
